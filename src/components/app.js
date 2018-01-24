@@ -145,8 +145,6 @@ class App extends Component {
   }
 
   render () {
-    const { homes } = this.props;
-    console.log(Object.values(homes))
     return (
       <div>
         <Header />
