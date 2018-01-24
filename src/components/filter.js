@@ -16,7 +16,7 @@ export default class Filter extends Component {
   }
 
   cities() {
-    if(this.props.globalState.updateFormsData.cities != undefined) {
+    if(this.props.globalState.updateFormsData.cities !== undefined) {
       var { cities } = this.props.globalState.updateFormsData
 
       return cities.map((item) => {
@@ -28,7 +28,7 @@ export default class Filter extends Component {
   }
 
   houseTypes() {
-    if(this.props.globalState.updateFormsData.houseTypes != undefined) {
+    if(this.props.globalState.updateFormsData.houseTypes !== undefined) {
       var { houseTypes } = this.props.globalState.updateFormsData
 
       return houseTypes.map((item) => {
@@ -40,7 +40,7 @@ export default class Filter extends Component {
   }
 
   bedrooms() {
-    if(this.props.globalState.updateFormsData.bedrooms != undefined) {
+    if(this.props.globalState.updateFormsData.bedrooms !== undefined) {
       var { bedrooms } = this.props.globalState.updateFormsData
 
       return bedrooms.map((item) => {

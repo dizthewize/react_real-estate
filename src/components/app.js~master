@@ -1,15 +1,16 @@
 import React, { Component} from 'react'
 import ReactDOM from 'react-dom'
-import Header from './components/header'
-import Filter from './components/filter'
-import Listings from './components/listings'
-import listingsData from './data/listingdata'
+import { connect } from 'react-redux'
+import Header from './header'
+import Filter from './filter'
+import Listings from './listings'
+import listingsData from '../data/listingdata'
 
-export default class App extends Component {
+class App extends Component {
   constructor () {
     super()
     this.state = {
-      name: 'Martez',
+      houseData: [],
       listingsData,
       city: 'All',
       houseType: 'All',
@@ -65,37 +66,37 @@ export default class App extends Component {
       return item.price >= this.state.min_price && item.price <= this.state.max_price && item.floorSpace >= this.state.min_floor_space && item.floorSpace <= this.state.max_floor_space && item.rooms >= this.state.bedroom
     })
 
-    if(this.state.city != "All") {
+    if(this.state.city !== "All") {
       newData = newData.filter((item) => {
-        return item.city == this.state.city
+        return item.city === this.state.city
       })
     }
 
-    if(this.state.houseType != "All") {
+    if(this.state.houseType !== "All") {
       newData = newData.filter((item) => {
-        return item.houseType == this.state.houseType
+        return item.houseType === this.state.houseType
       })
     }
 
-    if(this.state.sortby == 'price-dsc') {
+    if(this.state.sortby === 'price-dsc') {
       newData = newData.sort((a,b) => {
         return a.price - b.price
       })
     }
 
-    if(this.state.sortby == 'price-asc') {
+    if(this.state.sortby === 'price-asc') {
       newData = newData.sort((a,b) => {
         return b.price - a.price
       })
     }
 
-    if (this.state.search != '') {
+    if (this.state.search !== '') {
       newData = newData.filter((item) => {
         var city = item.city.toLowerCase()
         var searchText = this.state.search.toLowerCase()
         var n = city.match(searchText)
 
-        if (n != null) {
+        if (n !== null) {
           return true
         }
       })
@@ -140,12 +141,12 @@ export default class App extends Component {
         bedrooms,
         cities
       }
-    }, () => {
-      console.log(this.state)
     })
   }
 
   render () {
+    const { homes } = this.props;
+    console.log(Object.values(homes))
     return (
       <div>
         <Header />
@@ -177,3 +178,9 @@ export default class App extends Component {
     );
   }
 }
+
+const mapStateToProps = ({homes}) => {
+  return {homes};
+}
+
+export default connect(mapStateToProps)(App)

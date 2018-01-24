@@ -13,12 +13,12 @@ export default class Listings extends Component {
   listing() {
     var {listingsData} = this.props;
 
-    if(listingsData == undefined || listingsData.length == 0) {
+    if(listingsData === undefined || listingsData.length === 0) {
       return "Sorry your search did not match any listings"
     }
 
     return listingsData.map((listing, index) => {
-      if(this.props.globalState.view == 'box') {
+      if(this.props.globalState.view === 'box') {
         return (
           <div key={index} className="col-md-4">
             <div className="listing">
@@ -90,7 +90,7 @@ export default class Listings extends Component {
       <section id="listings">
 
         <section className="search-area">
-          <input type="text" name="search" onChange={this.props.change}/>
+          <input type="text" name="search" placeholder="Search By City" onChange={this.props.change}/>
         </section>
 
         <section className="sort-by-area">

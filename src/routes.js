@@ -1,13 +1,31 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from './actions';
 
-import App from './realestate/app';
-import NotFound from './realestate/components/notfound';
+import App from './components/app';
+import NotFound from './components/notfound';
 
-export default (
-  <Switch>
-    <Route path='/' component={App} />
-    <Route path='*' component={NotFound} />
-  </Switch>
+class Layout extends Component {
 
-);
+  componentDidMount() {
+    const { fetchHomes } = this.props
+    fetchHomes()
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Switch>
+            <Route path='/' component={App} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    )
+  }
+
+};
+
+export default connect(null, actions)(Layout)
